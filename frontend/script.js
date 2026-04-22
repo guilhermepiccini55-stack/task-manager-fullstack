@@ -1,7 +1,7 @@
 // URL dinâmica: usa variável de ambiente em produção, localhost em desenvolvimento
 const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
   ? "http://localhost:3000/tasks"
-  : "https://task-manager-backend-production.up.railway.app/tasks";
+  : "https://task-manager-fullstack-3181.onrender.com/tasks";
 
 const form = document.getElementById("task-form");
 const input = document.getElementById("task-input");
