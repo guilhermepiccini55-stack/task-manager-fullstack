@@ -1,10 +1,12 @@
-const API_URL = "http://localhost:3000/tasks";
+// URL dinâmica: usa variável de ambiente em produção, localhost em desenvolvimento
+const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+  ? "http://localhost:3000/tasks"
+  : "https://task-manager-backend-production.up.railway.app/tasks";
 
 const form = document.getElementById("task-form");
 const input = document.getElementById("task-input");
 const list = document.getElementById("task-list");
 
-// Load tasks on start
 fetchTasks();
 
 form.addEventListener("submit", async (e) => {
@@ -48,10 +50,7 @@ async function fetchTasks() {
 }
 
 async function deleteTask(id) {
-  await fetch(`${API_URL}/${id}`, {
-    method: "DELETE"
-  });
-
+  await fetch(`${API_URL}/${id}`, { method: "DELETE" });
   fetchTasks();
 }
 
@@ -61,6 +60,5 @@ async function toggleDone(id, done) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ done })
   });
-
   fetchTasks();
 }
